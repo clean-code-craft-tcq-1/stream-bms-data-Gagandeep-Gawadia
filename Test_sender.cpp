@@ -118,7 +118,7 @@ TEST_CASE ("Validate generated datastream is as expected")
     ch_1 = fgetc(fptr1);
     ch_2 = fgetc(fptr2);
     
-  for (;!feof(fptr2);  ch_1 = fgetc(fptr1), ch_2 = fgetc(fptr2);)
+  for (;!feof(fptr2);  ch_1 = fgetc(fptr1), ch_2 = fgetc(fptr2))
     {
       REQUIRE(ch_1 == ch_2);
     }
