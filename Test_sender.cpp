@@ -6,7 +6,7 @@
 
 TEST_CASE("Validate data generated is read") {
   
-  int const NumOfTest = 3;
+  int const NumOfTest = 2;
   read_status Output_Current_status;
   FILE * fptr;
 
@@ -26,7 +26,6 @@ TEST_CASE("Validate data generated is read") {
   inputmatrix test_inputmatrix[] =
                                   { {false, {0,0}, NotErroneous },
                                     {true,  {0,0}, ErroneousSoc },
-                                    {true,  {0,0}, ErroneousSoc },
                                   };
 
 
@@ -34,7 +33,6 @@ TEST_CASE("Validate data generated is read") {
   outputmatrix test_outputmatrix[] =
                                    { { {101,101}, NotErroneous },
                                      { {50,50 }, NotErroneous },
-                                     { {0,0}, ErroneousPars }
                                    };
 
 
@@ -50,17 +48,8 @@ TEST_CASE("Validate data generated is read") {
 
     //Helper/Interface function needs to be called to make sure intended file txt is generated
     GenerateDataStream();
-
-    if (TestCase != 2)
-    {
-      fptr = fopen("data.txt", "r");
-    }
-    else
-    {
-      fptr = NULL;
-    }
-
-    //in one test case NULL""
+   
+    fptr = fopen("data.txt", "r");
 
     for (int Par_Counter = 0; Par_Counter < NoOfParamterSet; Par_Counter++)
     {
@@ -75,13 +64,13 @@ TEST_CASE("Validate data generated is read") {
       	REQUIRE(test_inputmatrix[TestCase].parameterset[StateOfCharge] == test_outputmatrix[TestCase].parameterset[StateOfCharge]);
 #endif //(UNITTEST) 
     }
-
-    if (TestCase != 2)
-    {
-      fclose(fptr);
-    }
-
+    
+    fclose(fptr);
  }//End of test loop
 
-}
+ //Call function under test for NULL pointer
+ Output_Current_status = readDataFromFile(NULL, NULL);
+ REQUIRE(Output_Current_status == ErroneousPars);
+
+}//End of Test_Case
 
