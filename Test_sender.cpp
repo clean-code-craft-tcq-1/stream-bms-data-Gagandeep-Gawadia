@@ -96,7 +96,6 @@ TEST_CASE ("Validate generated datastream is as expected")
     {
       //Print to file Temperature/StateOfCharge parameter
       fprintf(fptr2, "%d", *RandomNo);
-      printf("%d", *RandomNo);
       // Print delimiter which is semicolon
       fprintf(fptr2, "%c", 59);
     }
@@ -116,17 +115,11 @@ TEST_CASE ("Validate generated datastream is as expected")
 
     //Verify one parameter set of file i.e. temp;soc;\n which is the fiel format
     char ch_1, ch_2;
-    while (1)
+    ch_1 = fgetc(fptr1);
+    ch_2 = fgetc(fptr2);
+    
+  for (;!feof(fptr2);  ch_1 = fgetc(fptr1), ch_2 = fgetc(fptr2);)
     {
-      ch_1 = fgetc(fptr1);
-      ch_2 = fgetc(fptr2);
-
-      //Since we only have one set written in verify.txt file fptr2 will reach eof after reading first set only
-      if (feof(fptr2))
-      {
-        break;
-      }
-
       REQUIRE(ch_1 == ch_2);
     }
 
