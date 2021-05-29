@@ -74,7 +74,7 @@ TEST_CASE("Validate data generated is read") {
 
 }//End of Test_Case
 
-TEST_CASE ("Validate generated datastream is as expected)
+TEST_CASE ("Validate generated datastream is as expected")
 {
     int data = 0;
     int *RandomNo = &data;
