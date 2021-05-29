@@ -90,7 +90,7 @@ read_status GenDataSet(int *temp, int *soc)
   return current_status;
 }
 
-void writeDataToFile(int genTempData, int genSocData)
+void writeDataToFile(int * parameterset)
 {
   FILE *fptr;
 
