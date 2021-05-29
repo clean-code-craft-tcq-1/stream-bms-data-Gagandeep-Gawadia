@@ -190,7 +190,7 @@ void GenerateDataStream()
 void Delete_DataLogFile()
 {
   if (remove("data.txt") == 0)
-    printf("Text file deleted successfully");
+    printf("Text file deleted successfully \n");
   else
-    printf("Unable to delete the txt file");
+    printf("Unable to delete the txt file \n");
 }
