@@ -112,15 +112,15 @@ void writeDataToFile(int genTempData, int genSocData)
 
     /*Print one dataset*/
 
-    //Print to file temperature parameter
-    fprintf(fptr, "%d", genTempData);
-    // Print delimiter which is semicolon
-    fprintf(fptr, "%c", 59);
-    //Print to file soc parameter
-    fprintf(fptr, "%d", genSocData);
-    // Print delimiter which is semicolon
-    fprintf(fptr, "%c", 59);
-    //Newline
+    for (int Par_Counter = 0; Par_Counter < NoOfPar; Par_Counter++)
+    { 
+      //Print to file Temperature/StateOfCharge parameter
+       fprintf(fptr, "%d", parameterset[Par_Counter]);
+      // Print delimiter which is semicolon
+       fprintf(fptr, "%c", 59);
+    }
+    
+    //Newline as we print one one set in each line
     fprintf(fptr, "\n");
 
     //Close file
@@ -142,7 +142,7 @@ void GenerateDataStream()
 {
   // Data will be streaming continuously and we are generating 15 dataset to
   // represent the same which will be genrated at delay of 1 sec set using delay function
-  for (int par_counter = 0; par_counter < NoOfParamterSet; par_counter++)
+  for (int ParSet_counter = 0; ParSet_counter < NoOfParamterSet; ParSet_counter++)
   {
     int par1 = 0, par2 = 0;
     // These are the 2 parameters temp and soc used to monitor battery.
@@ -152,32 +152,34 @@ void GenerateDataStream()
     read_status current_status = NotErroneous;
     current_status = GenDataSet(temp, soc);
 
-    int temp_actual = *temp;
-    int soc_actual = *soc;
+    int parameterset[NoOfPar];
+    parameterset[Temperature]= *temp;
+    parameterset[StateOfCharge] = *soc;
+
     switch (current_status)
     {
     case ErroneousPars:
     {
-      temp_actual = NotANum;
-      soc_actual = NotANum;
+      parameterset[Temperature]   = NotANum;
+      parameterset[StateOfCharge] = NotANum;
       break;
     }
     case ErroneousSoc:
     {
-      temp_actual = *temp;
-      soc_actual = NotANum;
+      parameterset[Temperature]   = *temp;
+      parameterset[StateOfCharge] = NotANum;
       break;
     }
     case ErroneousTemp:
     {
-      temp_actual = NotANum;
-      soc_actual = *soc;
+      parameterset[Temperature]   = NotANum;
+      parameterset[StateOfCharge] = *soc;
       break;
     }
     }
 
     //Generating file format of streaming data
-    writeDataToFile(temp_actual, soc_actual);
+    writeDataToFile(parameterset);
 
   }//Looping for dataset
 }// End of function GenerateDataStream()
