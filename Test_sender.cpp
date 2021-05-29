@@ -80,7 +80,7 @@ TEST_CASE ("Validate generated datastream is as expected")
     int *RandomNo = &data;
     
 #if (UNITTEST) 
-    set_success_stub(true)
+    set_success_stub(true);
 #endif 
     
     //If test case fails make sure txt file are deleted before running tests/ delete manually if required  
