@@ -183,3 +183,14 @@ void GenerateDataStream()
 
   }//Looping for dataset
 }// End of function GenerateDataStream()
+
+ /* We delete the txt file to be created everytime we run sender
+ * so that when we generate new data stream it written from beginning of the file
+ * and not append the old data. */
+void Delete_DataLogFile()
+{
+  if (remove("data.txt") == 0)
+    printf("Text file deleted successfully");
+  else
+    printf("Unable to delete the txt file");
+}
