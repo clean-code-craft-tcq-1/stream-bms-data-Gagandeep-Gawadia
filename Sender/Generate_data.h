@@ -15,3 +15,4 @@ read_status GenDataSet(int *temp, int *soc);
 void GenerateDataStream();
 void delay(int number_of_seconds);
 void writeDataToFile(int * parameterset);
+void Delete_DataLogFile();
