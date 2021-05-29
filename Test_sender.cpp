@@ -89,21 +89,19 @@ TEST_CASE ("Validate generated datastream is as expected")
   
     //Generate a dummy verify.txt file to be compared with data.txt
     FILE *fptr2 = fopen("verify.txt", "a");
-    if (fptr2 != NULL)
+    bool iSReadSuccessfull_temp = GenRandomParameter(RandomNo);
+  
+    /*Print one dataset*/
+    for (int Par_Counter = 0; Par_Counter < NoOfPar; Par_Counter++)
     {
-      bool iSReadSuccessfull_temp = GenRandomParameter(RandomNo);
-      /*Print one dataset*/
-      for (int Par_Counter = 0; Par_Counter < NoOfPar; Par_Counter++)
-      {
-        //Print to file Temperature/StateOfCharge parameter
-        fprintf(fptr2, "%d", *RandomNo);
-        printf("%d", *RandomNo);
-        // Print delimiter which is semicolon
-        fprintf(fptr2, "%c", 59);
-      }
-      //Newline
-      fprintf(fptr2, "\n");
+      //Print to file Temperature/StateOfCharge parameter
+      fprintf(fptr2, "%d", *RandomNo);
+      printf("%d", *RandomNo);
+      // Print delimiter which is semicolon
+      fprintf(fptr2, "%c", 59);
     }
+    //Newline
+    fprintf(fptr2, "\n");  
     //Close file
     fclose(fptr2);
 
