@@ -1,11 +1,9 @@
+#define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "test/catch.hpp"
 #include "Sender/Sender.c"
 #include "Sender/Generate_data.c"
-#include <assert.h>
 
-//TEST_CASE("Input valid") {
-int main()
-{
 
-	return 1;
+TEST_CASE("") {
 }
+
