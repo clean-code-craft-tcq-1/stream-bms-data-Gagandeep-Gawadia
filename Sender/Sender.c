@@ -21,24 +21,18 @@ read_status readDataFromFile(int* par, FILE *fptr)
     )
   {
     char ch;
-    
-    //Read first parameter temperature as mentioned in the format of file to be read
-    fscanf(fptr, "%d", &par[Temperature]);
+ 
+    for (int Counter_Par = 0; Counter_Par < NoOfPar; Counter_Par++)
+    {
+      //Read first parameter temperature as mentioned in the format of file to be read
+      fscanf(fptr, "%d", &par[Counter_Par]);
 
-    //Avoid delimiter do not save 
-    ch = fgetc(fptr);
+      //Avoid delimiter do not save 
+      ch = fgetc(fptr);
+    }
 
-    //Read second parameter soc as mentioned in the format of file to be read
-    fscanf(fptr, "%d", &par[StateOfCharge]);
-
-    /* After the 2 parameters were read we could choose to not read further but since the file pointer
-     * needs to point to next line location where the next set of parameter will be read we fetch data till new line*/
-
-     // Avoid delimiter  
-    ch = fgetc(fptr);
     //Avoid new line character and drop it as well
     ch = fgetc(fptr);
-
   }
   else
   {
@@ -75,7 +69,7 @@ void Streamdata()
   /* We are reading one set each time and running the loop for NoOfParamterSet -> 15 parameter set as expected in the problem statement
   *  readDataFromFile is called to read */
   //Since the demand of the project was to read NoOfParamterSet -> 15 parameter set we are running loop
-  for (int Par_Counter = 0; Par_Counter < NoOfParamterSet;Par_Counter++)
+  for (int Par_Counter = 0; Par_Counter < NoOfParamterSet; Par_Counter++)
   {
     current_status = readDataFromFile(parameterset, fptr);
 
