@@ -74,3 +74,68 @@ TEST_CASE("Validate data generated is read") {
 
 }//End of Test_Case
 
+TEST_CASE ("Validate generated datastream is as expected)
+{
+    int data = 0;
+    int *RandomNo = &data;
+    
+#if (UNITTEST) 
+    set_success_stub(true)
+#endif 
+    
+    //If test case fails make sure txt file are deleted before running tests/ delete manually if required  
+    remove("data.txt");
+    remove("verify.txt");  
+  
+    //Generate a dummy verify.txt file to be compared with data.txt
+    FILE *fptr2 = fopen("verify.txt", "a");
+    if (fptr2 != NULL)
+    {
+      bool iSReadSuccessfull_temp = GenRandomParameter(RandomNo);
+      /*Print one dataset*/
+      for (int Par_Counter = 0; Par_Counter < NoOfPar; Par_Counter++)
+      {
+        //Print to file Temperature/StateOfCharge parameter
+        fprintf(fptr2, "%d", *RandomNo);
+        printf("%d", *RandomNo);
+        // Print delimiter which is semicolon
+        fprintf(fptr2, "%c", 59);
+      }
+      //Newline
+      fprintf(fptr2, "\n");
+    }
+    //Close file
+    fclose(fptr2);
+
+    //Call function under test
+    GenerateDataStream();
+  
+    //Expected Output 
+#if (UNITTEST) 
+    //Open the 2 files and compare first dataset to see the data generated and written is as expected
+    FILE * fptr1 = fopen("data.txt", "r");
+    fptr2 = fopen("verify.txt", "r");
+
+    //Verify one parameter set of file i.e. temp;soc;\n which is the fiel format
+    char ch_1, ch_2;
+    while (1)
+    {
+      ch_1 = fgetc(fptr1);
+      ch_2 = fgetc(fptr2);
+
+      //Since we only have one set written in verify.txt file fptr2 will reach eof after reading first set only
+      if (feof(fptr2))
+      {
+        break;
+      }
+
+      REQUIRE(ch_1 == ch_2);
+    }
+
+    fclose(fptr1);
+    fclose(fptr2);
+ #endif 
+  
+    remove("data.txt");
+    remove("verify.txt");
+}//END OF TEST_CASE
