@@ -138,7 +138,7 @@ TEST_CASE ("Validate sender main function")
   
   // Creating data.txt file so that we verify file is deleted at the end by function Delete_DataLogFile() inside 
   // Sendermain()
-   FILE * fptr = fopen("data.txt", "w")
+   FILE * fptr = fopen("data.txt", "w");
    fclose(fptr);
   
    //Call function under test 
