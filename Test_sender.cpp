@@ -138,21 +138,21 @@ TEST_CASE ("Validate sender main function")
   
   // Creating data.txt file so that we verify file is deleted at the end by function Delete_DataLogFile() inside 
   // Sendermain()
-	fptr = fopen("data.txt", "w")
-	fclose(fptr);
+   FILE * fptr = fopen("data.txt", "w")
+   fclose(fptr);
   
-	//Call function under test 
-	Sendermain();
+   //Call function under test 
+   Sendermain();
 
   //This action should not be executed since the file is already deleted
-	if (remove("data.txt") == 0)
-	{
-		successIfTrue = false; 
-	}
-	else // Since the txt file is deleted already  
-	{
-		successIfTrue = true;
-   }
+  if (remove("data.txt") == 0)
+  {
+	successIfTrue = false; 
+  }
+  else // Since the txt file is deleted already  
+  {
+	successIfTrue = true;
+  }
 	
   REQUIRE(successIfTrue == true);
 }//END_OF_TEST_CASE
