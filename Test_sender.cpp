@@ -130,3 +130,29 @@ TEST_CASE ("Validate generated datastream is as expected")
     remove("data.txt");
     remove("verify.txt");
 }//END OF TEST_CASE
+
+//Added test case to validate that sender main functionality and also for coverage
+TEST_CASE ("Validate sender main function")
+{
+  bool successIfTrue = false;//Boolean to verify if the function Sendermain has executed successfully
+  
+  // Creating data.txt file so that we verify file is deleted at the end by function Delete_DataLogFile() inside 
+  // Sendermain()
+	fptr = fopen("data.txt", "w")
+	fclose(fptr);
+  
+	//Call function under test 
+	Sendermain();
+
+  //This action should not be executed since the file is already deleted
+	if (remove("data.txt") == 0)
+	{
+		successIfTrue = false; 
+	}
+	else // Since the txt file is deleted already  
+	{
+		successIfTrue = true;
+   }
+	
+  REQUIRE(successIfTrue == true);
+}//END_OF_TEST_CASE
