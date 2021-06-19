@@ -13,11 +13,10 @@ public class ReceiveData {
 		List<Integer> soc = new ArrayList<Integer>();
 		try {
 			Scanner in = new Scanner(System.in);
-			incomingData = in.nextLine();
-		while(incomingDataCounter <= incomingDataLimit) {
-			incomingDataCounter++;
+		while(true) {			
 			incomingData = in.nextLine();
 			if(incomingDataCounter == 0) {
+				incomingDataCounter++;
 				continue;
 			}
 			if(incomingDataCounter == incomingDataLimit)
@@ -25,11 +24,12 @@ public class ReceiveData {
 			
 			singleRecord = dataParser(incomingData);
 			if(singleRecord == null) {
-				System.out.println("Not a valid data");
+				System.out.println("Not a valid data" );
 				System.exit(1);
 			}
 			temperature.add(singleRecord[0]); 
-			soc.add(singleRecord[1]);			
+			soc.add(singleRecord[1]);
+			incomingDataCounter++;
 		}
 		printMaxAndMinValuesInParameter("Temperature", getMaxValueInParameter(temperature),getMinValueInParameter(temperature));
 		printMaxAndMinValuesInParameter("SOC", getMaxValueInParameter(soc),getMinValueInParameter(soc));
@@ -80,6 +80,6 @@ public class ReceiveData {
 	}
 	
 	public static void printSimpleMovingAverageForParams(String paramName, int averageValue) {
-		System.out.println("Simple moving average of "+ paramName + " is " + averageValue +"\n");
+		System.out.println("Simple moving average of "+ paramName + " is " + averageValue);
 	}
 }
