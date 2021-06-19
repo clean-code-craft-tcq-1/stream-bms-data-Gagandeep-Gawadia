@@ -1,5 +1,5 @@
-package main;
-import java.io.Console;
+package receiver;
+import java.io.*;
 import java.util.*;
 
 
