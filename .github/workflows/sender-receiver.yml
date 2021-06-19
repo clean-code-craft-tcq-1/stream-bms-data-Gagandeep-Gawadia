@@ -18,6 +18,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build Receiver for prod
-      run: javac receiver/main/ReceiveData.java
+      run: javac receiver/ReceiveData.java
     - name: run
-      run: ./input | java -ea -classpath . main.ReceiveData
+      run: ./input | java -ea -classpath . receiver.ReceiveData
