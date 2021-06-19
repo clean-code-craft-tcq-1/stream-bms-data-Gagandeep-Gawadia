@@ -28,6 +28,8 @@
   </dependencies>
 
   <build>
+     <sourceDirectory>receiver</sourceDirectory>
+  <testSourceDirectory>receiver/test</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.jacoco</groupId>
