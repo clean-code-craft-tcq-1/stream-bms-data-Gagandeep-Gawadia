@@ -13,12 +13,14 @@ public class ReceiveData {
 		List<Integer> soc = new ArrayList<Integer>();
 		try {
 			Scanner in = new Scanner(System.in);
+		while(true) {
+				incomingData = in.nextLine();				
+				if(incomingData.equalsIgnoreCase("Temperature;Soc;")) {
+					break;
+				}
+			
 		while(true) {			
 			incomingData = in.nextLine();
-			if(incomingDataCounter == 0) {
-				incomingDataCounter++;
-				continue;
-			}
 			if(incomingDataCounter == incomingDataLimit)
 				break;
 			System.out.println(incomingData + "test");
@@ -31,6 +33,7 @@ public class ReceiveData {
 			soc.add(singleRecord[1]);
 			incomingDataCounter++;
 		}
+			}
 		printMaxAndMinValuesInParameter("Temperature", getMaxValueInParameter(temperature),getMinValueInParameter(temperature));
 		printMaxAndMinValuesInParameter("SOC", getMaxValueInParameter(soc),getMinValueInParameter(soc));
 		printSimpleMovingAverageForParams("Temperature",getSimpleMovingAverageOfLastFiveParamValues(temperature));
