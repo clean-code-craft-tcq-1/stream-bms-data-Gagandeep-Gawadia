@@ -39,7 +39,6 @@ public class ReceiveData {
 			return null;
 		int[] singleRecord = new int[2];
 		String[] consoleData = readData.split(";");
-		System.out.println(consoleData.length);
 		if(consoleData.length < 2) 
 			return null;
 		singleRecord[0] = Integer.parseInt(consoleData[0]);
