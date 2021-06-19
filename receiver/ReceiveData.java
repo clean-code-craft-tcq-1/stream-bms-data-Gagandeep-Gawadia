@@ -7,7 +7,7 @@ public class ReceiveData {
 
 	public static void main(String[] args) {
 		String incomingData ;
-		int incomingDataLimit = 15, incomingDataCounter = 0;
+		int incomingDataLimit = 14, incomingDataCounter = 0;
 		int[] singleRecord = new int[2];
 		List<Integer> temperature = new ArrayList<Integer>();
 		List<Integer> soc = new ArrayList<Integer>();
