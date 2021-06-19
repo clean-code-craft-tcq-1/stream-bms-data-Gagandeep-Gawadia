@@ -20,4 +20,4 @@ jobs:
     - name: Build Receiver for prod
       run: javac receiver/ReceiveData.java
     - name: run
-      run: ./input 
+      run: ./input | java -ea -classpath . receiver.ReceiveData
