@@ -21,7 +21,7 @@ public class ReceiveData {
 			}
 			if(incomingDataCounter == incomingDataLimit)
 				break;
-			
+			System.out.println(incomingData + "test");
 			singleRecord = dataParser(incomingData);
 			if(singleRecord == null) {
 				System.out.println("Not a valid data" );
