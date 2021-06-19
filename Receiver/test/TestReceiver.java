@@ -1,50 +1,112 @@
-package test;
+<?xml version="1.0" encoding="UTF-8"?>
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+  <groupId>bmsdata</groupId>
+  <artifactId>bmsdata</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-import org.junit.Before;
-import org.junit.Test;
+  <name>bmsdata</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
 
-import main.ReceiveData;
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 
-public class TestReceiver {
-	List<Integer> paramList; 
-	ReceiveData receiveData;
-	
-	@Before
-	public void executedBeforeEach() {
-		paramList = new ArrayList<Integer>(Arrays.asList(50,80,30,20,60));
-		receiveData = new ReceiveData();
-	}
-	
-	@Test
-	public void givenParamList_whenContainsValue_thenReturnMaxValue() {
-		assertEquals(80, receiveData.getMaxValueInParameter(paramList));
-	}
-	
-	@Test
-	public void givenParamList_whenContainsValue_thenReturnMinValue() {
-		assertEquals(20, receiveData.getMinValueInParameter(paramList));
-	}	
-	
-	@Test
-	public void givenParamList_whenContainsFiveValues_thenReturnSimpleMovingAverage() {
-		assertEquals(48, receiveData.getSimpleMovingAverageOfLastFiveParamValues(paramList));
-	}
-	
-	@Test
-	public void givenSingleRecord_whenContainsNull_thenReturnNull() {
-		assertNull(receiveData.dataParser("null;null;"));
-	}
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-	@Test
-	public void givenReadings_whenEmpty_thenReturnNull() {
-		assertNull(receiveData.dataParser(";;"));
-	}
-	
-}
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.2</version>
+        <executions>
+            <execution>
+              <goals>
+                    <goal>prepare-agent</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>report</id>
+                <phase>prepare-package</phase>
+              <goals>
+                    <goal>report</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <reporting>
+  <plugins>
+        <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+            <reportSets>
+                  <reportSet>
+                      <reports>
+                        <!-- select non-aggregate reports -->
+                          <report>report</report>
+                      </reports>
+                  </reportSet>
+            </reportSets>
+        </plugin>
+  </plugins>
+</reporting>
+</project>
