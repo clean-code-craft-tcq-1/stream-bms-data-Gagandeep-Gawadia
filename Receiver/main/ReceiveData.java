@@ -60,13 +60,11 @@ public class ReceiveData {
 	}
 	
 	public static int getSimpleMovingAverageOfLastFiveParamValues(List<Integer> paramList) {
-		System.out.println("from "+ (paramList.size() - 5) + "to "+ (paramList.size() - 1));
 		List<Integer> lastFiveValues = paramList.subList(paramList.size() - 5, paramList.size());
 		int sum = 0;
 		try {
 			for(Integer paramValue: lastFiveValues) {
 				sum = sum + paramValue;
-				System.out.println(paramValue );
 			}
 		}
 		catch(Exception e) {			
