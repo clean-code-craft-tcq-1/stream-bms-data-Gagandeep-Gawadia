@@ -1,4 +1,4 @@
-package receiver;
+package main;
 import java.io.Console;
 import java.util.*;
 
@@ -12,7 +12,9 @@ public class ReceiveData {
 		int[] singleRecord = new int[2];
 		List<Integer> temperature = new ArrayList<Integer>();
 		List<Integer> soc = new ArrayList<Integer>();
-		while((incomingData = consoleReader.readLine()) != null) {
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		while((incomingData = reader.readLine()) != null) {
 			if(incomingDataCounter == 0) {
 				continue;
 			}
@@ -32,6 +34,10 @@ public class ReceiveData {
 		printMaxAndMinValuesInParameter("SOC", getMaxValueInParameter(soc),getMinValueInParameter(soc));
 		printSimpleMovingAverageForParams("Temperature",getSimpleMovingAverageOfLastFiveParamValues(temperature));
 		printSimpleMovingAverageForParams("SOC",getSimpleMovingAverageOfLastFiveParamValues(soc));
+		}
+		catch(Exception e) {
+			System.err.println(e);
+		}
 	}
 	
 	public static int[] dataParser(String readData) {
@@ -69,7 +75,8 @@ public class ReceiveData {
 				System.out.println(paramValue );
 			}
 		}
-		catch(Exception e) {			
+		catch(Exception e) {
+			System.err.println(e);
 		}
 		return sum/5;
 	}
