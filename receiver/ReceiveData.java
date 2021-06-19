@@ -18,7 +18,9 @@ public class ReceiveData {
 				if(incomingData.equalsIgnoreCase("Temperature;Soc;")) {
 					break;
 				}
-			
+				else
+					continue;
+		}
 		while(true) {			
 			incomingData = in.nextLine();
 			if(incomingDataCounter == incomingDataLimit)
@@ -33,7 +35,7 @@ public class ReceiveData {
 			soc.add(singleRecord[1]);
 			incomingDataCounter++;
 		}
-			}
+			
 		printMaxAndMinValuesInParameter("Temperature", getMaxValueInParameter(temperature),getMinValueInParameter(temperature));
 		printMaxAndMinValuesInParameter("SOC", getMaxValueInParameter(soc),getMinValueInParameter(soc));
 		printSimpleMovingAverageForParams("Temperature",getSimpleMovingAverageOfLastFiveParamValues(temperature));
