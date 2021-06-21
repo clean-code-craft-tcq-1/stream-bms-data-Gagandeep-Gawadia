@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build Receiver for prod
+    - name: Build Receiver
       run: javac receiver/ReceiveData.java
-    - name: run
+    - name: Execute Sender and Receiver
       run: ./input | java -ea -classpath . receiver.ReceiveData
